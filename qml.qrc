@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Home.qml</file>
+        <file>NameMenu.qml</file>
+        <file>CreateGame.qml</file>
+        <file>JoinGame.qml</file>
+        <file>main.qml</file>
+        <file>Lobby.qml</file>
+        <file>Game.qml</file>
+        <file>SearchGame.qml</file>
+    </qresource>
+</RCC>
