@@ -61,11 +61,11 @@ Item {
         y: 440
         width: 150
         height: 39
-        text: "<font color='#FFFFFF'>" + "Iniciar" + "</font>"
+        text: "<font color='#FFFFFF'>Iniciar</font>"
         font.letterSpacing: -1
         font.pointSize: 20
         font.family: glacialIndifferenceRegular.name
-        onClicked: mainStackView.pop()
+        onClicked: mainStackView.push(game)
     }
 
     RoundButton {
