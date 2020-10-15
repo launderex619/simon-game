@@ -17,6 +17,50 @@ ApplicationWindow {
         id: mainStackView
         initialItem: nameMenu
     }
+    Button {
+           text: "Open"
+           onClicked: popup.open()
+       }
+    Popup {
+            id: popup
+            x: 100
+            y: 180
+            width: 265
+            height: 150
+            font.bold: true
+            margins: -1
+            modal: true
+            focus: true
+            font.family: glacialIndifferenceBold.name
+            padding: 10
+            palette.window: "#FE7677"
+
+
+
+            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
+            contentItem: Text {
+                    text: "<font color='#ffffff'>" + "¡Error! Intente de nuevo" + "</font>"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+
+
+                }
+            RoundButton {
+                    id: button2
+                    palette.button: "#ffffff"
+                    x: 60
+                    y: 90
+                    width: 120
+                    height: 29
+                    text: "<font color='#FE6768'>" + "Salir" + "</font>"
+                    font.letterSpacing: -1
+                    font.pointSize: 10
+                    font.family: glacialIndifferenceRegular.name
+                    onClicked: popup.close()
+            }
+        }
+
 
     Component {
         id: home
@@ -52,4 +96,5 @@ ApplicationWindow {
         id: searchGame
         SearchGame {}
     }
+
 }

@@ -76,9 +76,9 @@ Item {
         id: roundButton
         x: 343
         y: 214
+        text: "<font color='#FFFFFF'>✓</font>"
         palette.button: "#36c08f"
-        text: "<font color='#FFFFFF'>" +  "\u2713" + "</font>"
-        onClicked: mainStackView.push(lobby)
+        onClicked: mainStackView.push(game)
     }
 
     RoundButton {
