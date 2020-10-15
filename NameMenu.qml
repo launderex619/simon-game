@@ -48,6 +48,10 @@ Item {
         font.family: glacialIndifferenceBold.name
         font.bold: false
     }
+
+    function textValidator() {
+        return txtInput.length > 0;
+    }
     
     RoundButton {
         id: roundButton
@@ -55,11 +59,14 @@ Item {
         y: 214
         palette.button: "#36c08f"
         text: "<font color='#FFFFFF'>" +  "\u2713" + "</font>"
-        onClicked: mainStackView.push(home)
+        onClicked: {
+            UserModel.setName(txtInput.text)
+            textValidator() ? mainStackView.push(home) : 0 // poner aqui el modal de error.
+        }
     }
     
     TextInput {
-        id: textInput
+        id: txtInput
         x: 107
         y: 221
         width: 201
@@ -70,6 +77,8 @@ Item {
         cursorVisible: true
         maximumLength: 14
         font.family: glacialIndifferenceRegular.name
+        text: "pussyDestroyer"
+
     }
     
     RoundButton {
