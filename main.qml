@@ -17,10 +17,7 @@ ApplicationWindow {
         id: mainStackView
         initialItem: nameMenu
     }
-    Button {
-           text: "Open"
-           onClicked: popup.open()
-       }
+
     Popup {
             id: popup
             x: 100

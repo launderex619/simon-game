@@ -61,7 +61,7 @@ Item {
         text: "<font color='#FFFFFF'>" +  "\u2713" + "</font>"
         onClicked: {
             UserModel.setName(txtInput.text)
-            textValidator() ? mainStackView.push(home) : 0 // poner aqui el modal de error.
+            textValidator() ? mainStackView.push(home) : popup.open()
         }
     }
     
@@ -77,7 +77,7 @@ Item {
         cursorVisible: true
         maximumLength: 14
         font.family: glacialIndifferenceRegular.name
-        text: "pussyDestroyer"
+        text: "xxX_NANIS_Xxx"
 
     }
     
