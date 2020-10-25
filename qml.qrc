@@ -8,5 +8,7 @@
         <file>Lobby.qml</file>
         <file>Game.qml</file>
         <file>SearchGame.qml</file>
+        <file>MessageController.js</file>
+        <file>SimonGameController.js</file>
     </qresource>
 </RCC>

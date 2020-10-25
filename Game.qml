@@ -1,11 +1,18 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.15
+import "SimonGameController.js" as GameController
 
 Item {
     width: 480
     height: 500
     visible: true
+    property var gameController: GameController
+
+    function initializeGameController() {
+        gameController.constructor(greenBtn, yellowBtn, redBtn, blueBtn, btnAnimation);
+    }
+
     FontLoader {
         id: glacialIndifferenceBold;
         name: qsTr("Glacial Indifference bold")
@@ -30,44 +37,101 @@ Item {
     }
 
 
+    RotationAnimation {
+        id: btnAnimation
+        target: NULL
+        from: 0
+        to: 360
+        duration: 500
+    }
+
+    function showAnimation() {
+        console.log (gameController.movements.length);
+        timer.counter = 0;
+        timer.start()
+//        for (let i = 0; i < gameController.movements.length; i++){
+//            animate(gameController.movements[i]);
+//        }
+    }
+
+    Timer {
+        id: timer
+        property var counter: 0
+        running: false
+        repeat: true
+        onTriggered: {
+            if (counter >= gameController.movements.length-1) {
+                timer.stop();
+            }
+            animate(gameController.movements[counter]);
+            counter++;
+        }
+    }
+
+    function animate(button) {
+        if (button === gameController.BLUE) {
+            btnAnimation.target = blueBtn;
+        } else if (button === gameController.RED) {
+            btnAnimation.target = redBtn;
+        } else if (button === gameController.YELLOW) {
+            btnAnimation.target = yellowBtn;
+        } else if (button === gameController.GREEN) {
+            btnAnimation.target = greenBtn;
+        }
+        btnAnimation.start();
+
+    }
+
     Button {
-        id: button
+        id: greenBtn
         x: 151
         y: 142
         width: 87
         height: 83
         text: qsTr("")
         palette.button: "#36c08f"
+        onClicked: {
+            gameController.addMovement(gameController.GREEN)
+        }
     }
 
     Button {
-        id: button1
+        id: yellowBtn
         x: 241
         y: 142
         width: 87
         height: 83
         text: qsTr("")
         palette.button: "#ffc425"
+        onClicked: {
+            gameController.addMovement(gameController.YELLOW)
+        }
     }
 
     Button {
-        id: button2
+        id: redBtn
         x: 150
         y: 228
         width: 87
         height: 83
         text: qsTr("")
         palette.button: "#ff0033"
+        onClicked: {
+            gameController.addMovement(gameController.RED)
+        }
     }
 
     Button {
-        id: button3
+        id: blueBtn
         x: 240
         y: 228
         width: 87
         height: 83
         text: qsTr("")
         palette.button: "#00a5e6"
+        onClicked: {
+            gameController.addMovement(gameController.BLUE)
+        }
     }
 
     Text {
@@ -195,6 +259,17 @@ Item {
         height: 19
         text: qsTr("Sala: ")
         font.pixelSize: 15
+    }
+
+    RoundButton {
+        id: roundButton5
+        x: 394
+        y: 235
+        text: "+"
+        onClicked: {
+            showAnimation()
+            console.log( btnAnimation.target )
+        }
     }
 }
 
