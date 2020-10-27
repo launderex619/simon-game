@@ -10,5 +10,7 @@
         <file>SearchGame.qml</file>
         <file>MessageController.js</file>
         <file>SimonGameController.js</file>
+        <file>SimonChatController.js</file>
+        <file>componentCreation.js</file>
     </qresource>
 </RCC>

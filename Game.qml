@@ -2,15 +2,18 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.15
 import "SimonGameController.js" as GameController
-
+import "SimonChatController.js" as ChatController
+import "componentCreation.js" as MyScript
 Item {
     width: 480
     height: 500
     visible: true
+     Component.onCompleted: MyScript.createSpriteObjects();
     property var gameController: GameController
-
+    property var chatController: ChatController
     function initializeGameController() {
         gameController.constructor(greenBtn, yellowBtn, redBtn, blueBtn, btnAnimation);
+
     }
 
     FontLoader {
@@ -105,8 +108,10 @@ Item {
         palette.button: "#ffc425"
         onClicked: {
             gameController.addMovement(gameController.YELLOW)
+
         }
     }
+
 
     Button {
         id: redBtn
@@ -229,29 +234,55 @@ Item {
     }
 
     TextField {
-        id: textField
+        id: messageTxt
         x: 8
         y: 453
         placeholderText: qsTr("Escribe un mensaje...")
     }
 
     RoundButton {
-        id: roundButton
+        id: sendBtn
         x: 214
         y: 453
         text: "<font color='#FFFFFF'>" +  "\u2713" + "</font>"
         palette.button: "#36c08f"
+        onClicked: {
+            chatController.sendingMessage(messageTxt.text)
+            createItem(messageTxt.text + "")
+            messageTxt.text=""
+        }
     }
 
     ScrollView {
         id: scrollView
         x: 8
-        y: 360
+        y: 324
         width: 246
-        height: 87
+        height: 115
+        bottomPadding: 10
+        Column{
+            id: col
+
+        }
     }
+    function createItem(chatMessage){
+        const messageObject = 'import QtQuick 2.0;
+Rectangle {color: "#36c08f"; width: myText.contentWidth; height: 20; radius: 7;
+Text {
+        anchors.fill:parent
+        id: myText
+        font.family: "Helvetica"
+        font.pointSize: 12
+        color: "#ffffff"
+        text:  qsTr("'+chatMessage+'")
+    } }';
+        console.log(messageObject)
+        var newObject = Qt.createQmlObject(messageObject,
+                                           col,
+                                           "dynamicSnippet1"); }
 
     Text {
+
         id: text2
         x: 355
         y: 81
@@ -259,6 +290,11 @@ Item {
         height: 19
         text: qsTr("Sala: ")
         font.pixelSize: 15
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        padding: 1
+        bottomPadding: 4
+
     }
 
     RoundButton {
@@ -272,6 +308,7 @@ Item {
         }
     }
 }
+
 
 /*##^##
 Designer {
